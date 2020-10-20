@@ -1,4 +1,4 @@
-# template-visor
+# Vector Tiles
 
 Template for use vector tiles - postgis
 
