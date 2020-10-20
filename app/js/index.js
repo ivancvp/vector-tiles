@@ -60,7 +60,7 @@ for (var i = 0; i <= 8; ++i) {
 function tileUrlFunction(tileCoord) {
 console.log(String(tileCoord[0] * 2 - 1))
   return (
-    'http://localhost:9000/layer/{x}/{y}/{z}.pbf'
+    'http://localhost:9000/mvt/{x}/{y}/{z}.pbf'
   )
     .replace('{z}', String(tileCoord[0] * 2 - 1))
     .replace('{x}', String(tileCoord[1]))

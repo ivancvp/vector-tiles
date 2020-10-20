@@ -139,7 +139,7 @@ app.get("/mvt/:x/:y/:z.pbf", function(req, res) {
                 console.log(err)
                 response.status(400)
             } else {
-              console.log(mvt.rows[0].st_asmvt)
+              //console.log(mvt.rows[0].st_asmvt)
                 res.setHeader('Access-Control-Allow-Origin', '*');
                 res.setHeader('Content-Type', 'application/x-protobuf')
                 fs.writeFileSync("foo.pbf", mvt.rows[0].st_asmvt);
