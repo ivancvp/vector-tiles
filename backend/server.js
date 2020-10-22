@@ -11,11 +11,11 @@ var zlib = require('zlib');
 
 
 const pool = new Pool({
-    host: "localhost",
+    host: "192.168.1.191",
     port: 5432,
-    user: "postgres",
-    database: "vector-tiles",
-    password: '123456'
+    user: "admingeo",
+    database: "coberturas",
+    password: 'admingeo2403DANE'
 })
 const mercator = new SphericalMercator()
 
@@ -49,9 +49,9 @@ function vectorTile(x, y, z) {
     SELECT ST_AsMVT(q, 'mpio', 4096, 'geom')
     FROM (
         SELECT
-            nombre_mpio,
-            nombre_depto,
-            ST_AsMVTGeom(
+        nombre_mpio,
+        nombre_depto,
+        ST_AsMVTGeom(
                 geom,
                 TileBBox(${z}, ${x}, ${y}, 3857),
                 4096,
@@ -130,10 +130,11 @@ app.get("/mvt/:x/:y/:z.pbf", function(req, res) {
                 0,
                 false
             ) geom
-        FROM sector_rural_p
+        FROM mact_areaoperativa
         WHERE ST_Intersects(geom, (SELECT ST_Transform(ST_MakeEnvelope($1, $2, $3, $4, $5), 3857)))
     ) q`
     const values = [bbox[0], bbox[1], bbox[2], bbox[3], 4326]
+    console.log(values);
     pool.query(sql, values , function(err, mvt) {
             if (err) {
                 console.log(err)
